@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
+use App\Models\AI;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +21,9 @@ use Inertia\Inertia;
 //         'test' => 'Hello World!',
 //     ]);
 // });
+
+Route::get('/ai-messages', function (Request $request) {
+    return AI::query()
+        ->orderBy('id')
+        ->cursorPaginate(15); // 15 est le nombre d'éléments par page
+});
